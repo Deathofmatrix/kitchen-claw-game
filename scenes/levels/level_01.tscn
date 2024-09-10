@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cp822nmhfqpbb"]
+
+[ext_resource type="PackedScene" uid="uid://8pxertp3j65n" path="res://scenes/characters/player_claw.tscn" id="1_qvgo1"]
+[ext_resource type="Script" path="res://scenes/levels/food_item.gd" id="2_rm22e"]
+[ext_resource type="Texture2D" uid="uid://cy70tggjmj1kx" path="res://assets/resources/food/coffee_mediumroast.png" id="3_33c35"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ypqrn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khnwc"]
+
+[node name="Level01" type="Node"]
+
+[node name="PlayerClaw" parent="." instance=ExtResource("1_qvgo1")]
+position = Vector2(187, 20)
+
+[node name="TestObject" type="Area2D" parent="." groups=["grabbable"]]
+position = Vector2(625, 341)
+script = ExtResource("2_rm22e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestObject"]
+shape = SubResource("RectangleShape2D_ypqrn")
+
+[node name="Sprite2D" type="Sprite2D" parent="TestObject"]
+texture = ExtResource("3_33c35")
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(14, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_khnwc")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(454, 11)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_khnwc")

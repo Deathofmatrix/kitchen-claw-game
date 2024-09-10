@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://8pxertp3j65n"]
+
+[ext_resource type="Script" path="res://scenes/characters/player_claw.gd" id="1_lq0w4"]
+[ext_resource type="Texture2D" uid="uid://bvja7jg47xkmp" path="res://assets/resources/ClawHolder.png" id="2_m3ip0"]
+[ext_resource type="Texture2D" uid="uid://b7wk18nvdoim2" path="res://assets/resources/Claw-Sheet.png" id="3_7yppd"]
+[ext_resource type="Script" path="res://scenes/characters/claw_line.gd" id="3_o1ldc"]
+[ext_resource type="Texture2D" uid="uid://bx6cestm8jl7a" path="res://assets/resources/Wire.png" id="4_ay3h2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31ovf"]
+radius = 9.0
+height = 18.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_co8t3"]
+radius = 16.0
+height = 32.0
+
+[node name="PlayerClawController" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_lq0w4")
+
+[node name="BaseCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_31ovf")
+
+[node name="BaseSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_m3ip0")
+
+[node name="Claw" type="RigidBody2D" parent="."]
+position = Vector2(0, 39)
+linear_damp = 5.0
+angular_damp = 5.0
+
+[node name="ClawCollision" type="CollisionShape2D" parent="Claw"]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_co8t3")
+
+[node name="ClawSprite" type="Sprite2D" parent="Claw"]
+unique_name_in_owner = true
+texture = ExtResource("3_7yppd")
+hframes = 4
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="ClawAttatch" type="Marker2D" parent="Claw"]
+unique_name_in_owner = true
+position = Vector2(0, -12)
+
+[node name="ClawSpring" type="DampedSpringJoint2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 13)
+node_a = NodePath("..")
+node_b = NodePath("../Claw")
+length = 10.0
+rest_length = 10.0
+stiffness = 64.0
+
+[node name="ClawLine" type="Line2D" parent="."]
+z_index = -10
+position = Vector2(0, 9)
+points = PackedVector2Array(0, 0, 0, 0)
+width = 4.0
+texture = ExtResource("4_ay3h2")
+texture_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("3_o1ldc")
