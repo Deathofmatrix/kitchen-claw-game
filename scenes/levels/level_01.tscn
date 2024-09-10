@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cp822nmhfqpbb"]
+[gd_scene load_steps=7 format=3 uid="uid://cp822nmhfqpbb"]
 
 [ext_resource type="PackedScene" uid="uid://8pxertp3j65n" path="res://scenes/characters/player_claw.tscn" id="1_qvgo1"]
 [ext_resource type="Script" path="res://scenes/levels/food_item.gd" id="2_rm22e"]
@@ -8,14 +8,19 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_khnwc"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eq8cp"]
+size = Vector2(638, 20)
+
 [node name="Level01" type="Node"]
 
 [node name="PlayerClaw" parent="." instance=ExtResource("1_qvgo1")]
 position = Vector2(187, 20)
 
-[node name="TestObject" type="Area2D" parent="." groups=["grabbable"]]
-position = Vector2(625, 341)
+[node name="TestObject" type="CharacterBody2D" parent="." groups=["grabbable"]]
+position = Vector2(322, 341)
+collision_layer = 2
 script = ExtResource("2_rm22e")
+speed = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TestObject"]
 shape = SubResource("RectangleShape2D_ypqrn")
@@ -29,6 +34,13 @@ position = Vector2(14, 12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_khnwc")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(14, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(303, 350)
+shape = SubResource("RectangleShape2D_eq8cp")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(454, 11)
